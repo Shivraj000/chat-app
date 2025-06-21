@@ -14,7 +14,8 @@ async function fetchApi(url, options = {}) {
 }
 
 export const signupUser = (userData) => {
-  // userData: { fullName, username, password, gender }
+  // userData: { fullName, username, password, confirmPassword, gender }
+  // Now expects confirmPassword to be part of userData
   return fetchApi(`${BASE_URL}/auth/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

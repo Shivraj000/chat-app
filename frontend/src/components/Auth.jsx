@@ -40,6 +40,7 @@ const Auth = ({ onAuthSuccess }) => {
           fullName: formData.fullName,
           username: formData.username,
           password: formData.password,
+          confirmPassword: formData.confirmPassword, // Add confirmPassword here
           gender: formData.gender,
         });
       }
