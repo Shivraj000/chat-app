@@ -31,9 +31,9 @@ const ChatArea = ({ currentUser, selectedUser, messages, loadingMessages, onMess
     setSending(true);
     setSendError('');
     try {
-      await apiSendMessage(selectedUser._id, newMessage.trim());
+      const sentMessage = await apiSendMessage(selectedUser._id, newMessage.trim());
       setNewMessage('');
-      onMessageSent(); // Callback to App.jsx to refresh messages
+      onMessageSent(sentMessage); // Pass the newly sent message object to the callback
     } catch (err) {
       setSendError(err.message || 'Failed to send message');
     } finally {

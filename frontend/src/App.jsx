@@ -90,18 +90,16 @@ function App() {
   };
 
   // This function will be passed to ChatArea to update messages after sending
-  const refreshMessagesForSelectedUser = async () => {
-    if (selectedUser) {
-      setLoadingMessages(true);
-      try {
-        const fetchedMessages = await getMessages(selectedUser._id);
-        setMessages(fetchedMessages);
-      } catch (err) {
-        setError(err.message || 'Failed to refresh messages');
-      } finally {
-        setLoadingMessages(false);
-      }
+  // It now expects the newly sent message object as an argument.
+  const handleNewMessage = (newMessageObject) => {
+    if (newMessageObject && selectedUser && newMessageObject.receiverId === selectedUser._id || newMessageObject.senderId === selectedUser._id) {
+      setMessages((prevMessages) => [...prevMessages, newMessageObject]);
+    } else if (newMessageObject && currentUser && newMessageObject.senderId === currentUser._id) {
+      // If current user sent it, add it even if selectedUser isn't the receiver (e.g. message to self, or if UI allows sending to non-selected)
+       setMessages((prevMessages) => [...prevMessages, newMessageObject]);
     }
+    // We don't need to setLoadingMessages or setError here as this is an optimistic update based on a successful send.
+    // The ChatArea component handles send errors locally.
   };
 
 
@@ -124,7 +122,7 @@ function App() {
         selectedUser={selectedUser}
         messages={messages}
         loadingMessages={loadingMessages}
-        onMessageSent={refreshMessagesForSelectedUser} // Pass the refresh function
+        onMessageSent={handleNewMessage} // Pass the new handler function
         error={error} // Pass error to display if relevant
       />
       {/* Global error display can be added here if needed */}
