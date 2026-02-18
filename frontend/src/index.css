@@ -1,0 +1,89 @@
+/* Global styles for the chat app */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0; /* Remove body padding, App will control layout */
+  background-color: #f0f2f5; /* A slightly softer background */
+  color: #1c1e21; /* Standard text color */
+  display: flex; /* Ensure body takes full height for flexbox in App */
+  justify-content: center; /* Center content if App doesn't take full width */
+  align-items: center; /* Center content if App doesn't take full height */
+  min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+#root {
+  width: 100%;
+  height: 100vh; /* Make root take full viewport height */
+  max-width: 1000px; /* Max width for the chat app container */
+  margin: 0 auto; /* Center the app container if max-width is reached */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the app container */
+  display: flex; /* Allow App component to use flexbox for its children */
+  flex-direction: column; /* If App itself needs to stack things */
+  overflow: hidden; /* Prevent scrollbars on root if children manage their own scroll */
+}
+
+/* General input styling (can be overridden by component-specific styles) */
+input[type="text"],
+input[type="password"],
+select {
+  display: block;
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #dddfe2;
+  border-radius: 6px;
+  box-sizing: border-box; /* Ensures padding doesn't add to width */
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+button:disabled {
+  background-color: #aecbfa; /* Lighter color when disabled */
+  cursor: not-allowed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  color: #1c1e21;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Basic scrollbar styling for Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
